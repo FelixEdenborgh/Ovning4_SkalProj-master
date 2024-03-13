@@ -6,10 +6,11 @@ Frågor:
    Då deras livstid är begränsad till när metoden "körs".
    När du skapar ett object som t ex MyClass myObject = new MyClass(); så händer 2 saker. Första är att den allokeras och lagras på heapen. 2. En referens variable myObject skapas på stacken. Denna variablen pekar på objectets plats på heapen.
    Även om myObjects referens finns på stacken så pekar den till objektets faktiska data som finns lagrad på heapen.
-   ![mspaint_0ImKmFcIq0](https://github.com/FelixEdenborgh/Ovning4_SkalProj_Datastrukturer_Minne/assets/31070311/d74ddbd4-1984-4e5c-a022-f4c2fe60aee4)
+   ![mspaint_0ImKmFcIq0](https://github.com/FelixEdenborgh/Ovning4_SkalProj-master/assets/31070311/a7c465b0-af46-41e3-9bff-419f09106edc)
 
 
-2. Vad är Value Types respektive Reference Types och vad skiljer dem åt?
+
+3. Vad är Value Types respektive Reference Types och vad skiljer dem åt?
    Value types: Value types lagrar data direkt och inkluderar de primitiva datatyperna samt strukturer (structs) och enum-typen.
    När de tilldelar en value type till en annan variabel, kopieras värdet direkt. Det betyder att den ursprungliga och den nya variablen opererar på två oberoende datavärden.
    Ändringar till det ena världet påverkar inte det andra. Exempel på value types är: (int, double, float, bool, chat, (Strukturer definierade med struct) och enum-typen).
@@ -18,7 +19,7 @@ Frågor:
    Exempel på reference types: Klasser( definerade med class), Arrays, Delegater, string, object och interface.
 
 
-3. Följande metoder (se bild nedan) genererar olika svar. Den första returnerar 3, den andra returnerar 4, varför?
+4. Följande metoder (se bild nedan) genererar olika svar. Den första returnerar 3, den andra returnerar 4, varför?
    Första metoden använder: Value types:
    
    ![opera_Ab59V7QiUD](https://github.com/FelixEdenborgh/Ovning4_SkalProj_Datastrukturer_Minne/assets/31070311/e74cc5d4-d44e-401d-ad04-f56cf6ce85e7)
