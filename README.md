@@ -22,12 +22,14 @@ Frågor:
 4. Följande metoder (se bild nedan) genererar olika svar. Den första returnerar 3, den andra returnerar 4, varför?
    Första metoden använder: Value types:
    
-   ![opera_Ab59V7QiUD](https://github.com/FelixEdenborgh/Ovning4_SkalProj_Datastrukturer_Minne/assets/31070311/e74cc5d4-d44e-401d-ad04-f56cf6ce85e7)
+   ![opera_Ab59V7QiUD](https://github.com/FelixEdenborgh/Ovning4_SkalProj-master/assets/31070311/e1034d05-b12e-44ab-98ff-57a992b08bfc)
+
 
    Där både x och y är value types. När y tilldelas värdet av x kopieras värdet av x till y senare ändringar på y påverkar inte x eftersom de är helt separata variabler som lagrar sina värden direkt.
 
    Andra metohden använder: Reference types:
-   ![opera_OsrsIufC5u](https://github.com/FelixEdenborgh/Ovning4_SkalProj_Datastrukturer_Minne/assets/31070311/bd834c69-12a0-4ab7-8304-81ca8a563395)
+   ![opera_OsrsIufC5u](https://github.com/FelixEdenborgh/Ovning4_SkalProj-master/assets/31070311/f766eb91-b90b-4312-89df-9cd54ce753ad)
+
 
    I detta fallet är x och y reference types vilket betyder att de lagrar referense till object i minnet på heapen.
    När y tilldelas x börjar de peka på samma object. Så när y.MyValue sätts till 4 påverkas objektet som x också pekar på och x.MyValue blir därmed också 4.
