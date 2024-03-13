@@ -105,7 +105,7 @@ namespace SkalProj_Datastrukturer_Minne
                         {
                             Console.WriteLine(item);
                         }
-                        break;// test
+                        break;
                     default:
                         Console.WriteLine("Exiting ExamineList() method!");
                         loopPlay = false;
