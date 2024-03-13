@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SkalProj_Datastrukturer_Minne
 {
@@ -72,12 +73,46 @@ namespace SkalProj_Datastrukturer_Minne
              * Below you can see some inspirational code to begin working.
             */
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            List<string> theList = new List<string>();
+            bool loopPlay = true;
+            while (loopPlay)
+            {
+                Console.WriteLine("Enter +: To add, or -: To remove or quit: To exit, S: To Show all data in list");
+                Console.WriteLine("Like: +Adam to add Adam to list, or -Adam to remove Adam from list");
+                string input = Console.ReadLine();
+                char nav = input[0];// get the command for + and -
 
-            //switch(nav){...}
+
+                string value = input.Substring(1).ToLower(); // Checking list with start from secound value for example +Adam = Adam
+
+
+                switch (nav)
+                {
+                    case '+':
+                        theList.Add(value);
+                        break;
+                    case '-':
+                        for(int i = 0; i < theList.Count; i++)
+                        {
+                            if (theList[i] == value)
+                            {
+                                theList.RemoveAt(i);
+                            }
+                        }
+                        break;
+                    case 's':
+                        foreach(var item in theList)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Exiting ExamineList() method!");
+                        loopPlay = false;
+                        break;
+                }
+            }
+            
         }
 
         /// <summary>
