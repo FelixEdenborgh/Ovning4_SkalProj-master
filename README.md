@@ -38,3 +38,23 @@ Frågor:
    Skillnaden i beteende mellan dessa två metoder illustrerar skillnaden mellan value types och reference types:
    För value types (int i det första exemplet), kopieras värdet. Så när du modifierar en kopia, påverkas inte det ursprungliga värdet.
    För reference types (objektet MyInt i det andra exemplet), kopieras referensen till objektet. Så när du modifierar objektet via en referens, påverkas alla referenser som pekar på det objektet.
+
+
+
+
+
+Övning 3: ExamineStack()
+   Stackar påminner om köer, men en stor skillnad är att stackar använder sig av Först In Sist Ut (FILO) principen. Alltså gäller att det element som stoppas in först (push) är det som kommer tas bort sist (pop).
+   5/7
+   1. Simulera ännu en gång ICA-kön på papper. Denna gång med en stack. Varför är det inte så smart att använda en stack i det här fallet?
+      Problemet är att om man kör som en ICA kö med stack så kommer det vara att den som kommer först till kön kommer längst bak och den som kommer sist
+      får hjälp först.
+      Och det kommer aldrig funka då man själv vill inte vänta längre varje gång det kommer en ny person som vill betala.
+      Utan man vill hälre vara att den som kommer först får hjälp först.
+      Se bild för mer info:
+      
+      ![mspaint_meux5IZOcL](https://github.com/FelixEdenborgh/Ovning4_SkalProj-master/assets/31070311/68d91aff-8f3f-473b-90da-e64097b53068)
+
+
+
+   
