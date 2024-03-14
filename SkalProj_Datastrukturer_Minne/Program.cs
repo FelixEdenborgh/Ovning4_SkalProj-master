@@ -79,47 +79,59 @@ namespace SkalProj_Datastrukturer_Minne
             // loopar så länge loopPlay inte är falsk
             while (loopPlay)
             {
-                Console.WriteLine("Enter +: To add, or -: To remove, S: To Show all data in list, c: to see what happens, q: to quit");
+                Console.WriteLine("Enter +: To add, or -: To remove, S: To Show all data in list, c: to see what happens, q: to quit\n");
                 Console.WriteLine("Like: +Adam to add Adam to list, or -Adam to remove Adam from list");
-                string input = Console.ReadLine().ToLower();
-                char nav = input[0];// get the command for + and -
-
-
-                string value = input.Substring(1).ToLower(); // Checking list with start from secound value for example +Adam = Adam
-
-                // Switch som hanterar menyn
-                switch (nav)
+                // tar hand här om varningen att det kan vara en null
+                string? input = Console.ReadLine();
+                if(input != null)
                 {
-                    case '+':
-                        theList.Add(value);
-                        break;
-                    case '-':
-                        for(int i = 0; i < theList.Count; i++)
-                        {
-                            if (theList[i] == value)
+                    input = input.ToLower();
+                    char nav = input[0];// get the command for + and -
+
+                    string value = input.Substring(1).ToLower(); // Checking list with start from secound value for example +Adam = Adam
+
+                    // Switch som hanterar menyn
+                    switch (nav)
+                    {
+                        case '+':
+                            theList.Add(value);
+                            break;
+                        case '-':
+                            for (int i = 0; i < theList.Count; i++)
                             {
-                                theList.RemoveAt(i);
+                                if (theList[i] == value)
+                                {
+                                    theList.RemoveAt(i);
+                                }
                             }
-                        }
-                        break;
-                    case 's':
-                        foreach(var item in theList)
-                        {
-                            Console.WriteLine(item);
-                        }
-                        break;
-                    case 'q':
-                        Console.WriteLine("Exiting ExamineList() method!");
-                        loopPlay = false;
-                        break;
-                    case 'c':
-                        Console.WriteLine(theList.Capacity);
-                        Console.WriteLine(theList.Count);
-                        break;
-                    default:
-                        Console.WriteLine("Only use '+' or '-' or 's' to show list, or 'q' to exit");
-                        break;
+                            break;
+                        case 's':
+                            Console.WriteLine("List: \n");
+                            foreach (var item in theList)
+                            {
+                                Console.WriteLine(item);
+                            }
+                            Console.WriteLine();
+                            break;
+                        case 'q':
+                            Console.WriteLine("Exiting ExamineList() method!");
+                            loopPlay = false;
+                            break;
+                        case 'c':
+                            Console.WriteLine();
+                            Console.WriteLine($"Capacity: {theList.Capacity}");
+                            Console.WriteLine($"Count: {theList.Count}");
+                            break;
+                        default:
+                            Console.WriteLine("Only use '+' or '-' or 's' to show list, or 'q' to exit");
+                            break;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Dont enter a null value!");
+                }
+                
             }
             // Det jag kan se är att desså fler användare jag lägger till desså mer Process memeory används, och dessöt mer ökar Gc Heap Sizen,
             // samt att listan ökar storleken så fort man går upp till x antal, dvs 4 ökar till 8, 8 till 16 och 16 till 32. om jag lägger t ex in 4 namn så ökar listans kapasitet med dubbelt
@@ -176,84 +188,110 @@ namespace SkalProj_Datastrukturer_Minne
             while (play)
             {
                 Console.WriteLine("1. Add person to que\n2. List all persons in que\n3. Remove a person from que\n4. Remove first person from que\n5. Show next one in top of que\n6. Exit\n");
-                string input = Console.ReadLine();
-                switch (input)
+                // tar hand här om varningen att det kan vara en null
+                string? input = Console.ReadLine();
+                if(input != null)
                 {
-                    case "1":
-                        // Lägger till ny kund i listan
-                        Console.WriteLine("Enter name of customer: ");
-                        string customer = Console.ReadLine();
-                        CustomerQue.Enqueue(customer);
-                        Console.WriteLine();
-                        break;
-                    case "2":
-                        // loopar igenom alla kunderna i listan
-                        foreach(string cust in CustomerQue)
-                        {
-                            Console.WriteLine(cust);
-                        }
-                        break;
-                    case "3":
-                        // Att ta bort någon person som är mitten av listan bryter mot köns grundläggande princip först in och först ut (FIFO).
-                        // Men det går att göra
-                        // Med denna kan du både ta bort i mitten av listan samt första och sista. Du väljer själv
-                        Console.WriteLine("Enter the name of the customer that are going to leave the Que: ");
-                        string customerLeaveQue = Console.ReadLine().Trim(); // Tar bort oavsiktliga blanksteg
-
-                        // För att ta bort någon i mitten av quelistan så behöver man göra en nya och sedan spara den nya över den gamla.
-                        // Om man vill bara ta bort första eller sista så kan man köra "dequeue".
-                        // Denna tar bara bort dem i mitten och inte första eller sista.
-                        Queue<string> newQueList = new Queue<string>();
-                        bool found = false;
-                        foreach (string customersInQue in CustomerQue)
-                        {
-                            if (customersInQue.Equals(customerLeaveQue, StringComparison.OrdinalIgnoreCase) && !found)
+                    switch (input)
+                    {
+                        case "1":
+                            // Lägger till ny kund i listan
+                            Console.WriteLine("Enter name of customer: ");
+                            // tar hand här om varningen att det kan vara en null
+                            string? customer = Console.ReadLine();
+                            if(customer != null)
                             {
-                                found = true; // Förhindrar att fler kunder tas bort
-                                continue; // Hoppar över att lägga till denna kund i den nya kön
+                                CustomerQue.Enqueue(customer);
+                                Console.WriteLine();
                             }
-                            // Lägger in alla andra kunder i den nya kön
-                            newQueList.Enqueue(customersInQue);
-                        }
+                            else
+                            {
+                                Console.WriteLine("Please enter a non null value");
+                            }
+                            break;
+                        case "2":
+                            // loopar igenom alla kunderna i listan
+                            foreach (string cust in CustomerQue)
+                            {
+                                Console.WriteLine(cust);
+                            }
+                            break;
+                        case "3":
+                            // Att ta bort någon person som är mitten av listan bryter mot köns grundläggande princip först in och först ut (FIFO).
+                            // Men det går att göra
+                            // Med denna kan du både ta bort i mitten av listan samt första och sista. Du väljer själv
+                            Console.WriteLine("Enter the name of the customer that are going to leave the Que: ");
+                            // tar hand här om varningen att det kan vara en null
+                            string? customerLeaveQue = Console.ReadLine(); // Tar bort oavsiktliga blanksteg
+                            if(customerLeaveQue != null)
+                            {
+                                customerLeaveQue = customerLeaveQue.Trim();
 
-                        if (found)
-                        {
-                            // Uppdaterar den ursprungliga kön endast om den specifika kunden hittades och togs bort
-                            CustomerQue = newQueList;
-                            Console.WriteLine($"{customerLeaveQue} has been removed from the que\n");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Person: {customerLeaveQue} was not found in the que\n");
-                        }
-                        Console.WriteLine();
-                        break;
-                    case "4":
-                        Console.WriteLine("Removing the first person in the que");
-                        Console.WriteLine($"{CustomerQue.Peek()} has been removed from que\n");
-                        CustomerQue.Dequeue();
-                        break;
-                    case "5":
-                        // Vissar nästa kund som är på tur utan att ta bort den från kön.
-                        if(CustomerQue.Count == 0)
-                        {
-                            Console.WriteLine("The list is empty\n");
-                        }
-                        else
-                        {
-                            string nextCustomer = CustomerQue.Peek();
-                            Console.WriteLine($"\nNext customer thats gonna shop: {nextCustomer}");
-                        }
-                        break;
-                    case "6":
-                        // Avslutar loopen
-                        Console.WriteLine("Loop ending!");
-                        play = false;
-                        break;
-                    default:
-                        Console.WriteLine("Please only use the numbers: 1-6");
-                        break;
+                                // För att ta bort någon i mitten av quelistan så behöver man göra en nya och sedan spara den nya över den gamla.
+                                // Om man vill bara ta bort första eller sista så kan man köra "dequeue".
+                                // Denna tar bara bort dem i mitten och inte första eller sista.
+                                Queue<string> newQueList = new Queue<string>();
+                                bool found = false;
+                                foreach (string customersInQue in CustomerQue)
+                                {
+                                    if (customersInQue.Equals(customerLeaveQue, StringComparison.OrdinalIgnoreCase) && !found)
+                                    {
+                                        found = true; // Förhindrar att fler kunder tas bort
+                                        continue; // Hoppar över att lägga till denna kund i den nya kön
+                                    }
+                                    // Lägger in alla andra kunder i den nya kön
+                                    newQueList.Enqueue(customersInQue);
+                                }
+
+                                if (found)
+                                {
+                                    // Uppdaterar den ursprungliga kön endast om den specifika kunden hittades och togs bort
+                                    CustomerQue = newQueList;
+                                    Console.WriteLine($"{customerLeaveQue} has been removed from the que\n");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"Person: {customerLeaveQue} was not found in the que\n");
+                                }
+                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Please dont enter a null value");
+                            }
+                            break;
+                        case "4":
+                            Console.WriteLine("Removing the first person in the que");
+                            Console.WriteLine($"{CustomerQue.Peek()} has been removed from que\n");
+                            CustomerQue.Dequeue();
+                            break;
+                        case "5":
+                            // Vissar nästa kund som är på tur utan att ta bort den från kön.
+                            if (CustomerQue.Count == 0)
+                            {
+                                Console.WriteLine("The list is empty\n");
+                            }
+                            else
+                            {
+                                string nextCustomer = CustomerQue.Peek();
+                                Console.WriteLine($"\nNext customer thats gonna shop: {nextCustomer}");
+                            }
+                            break;
+                        case "6":
+                            // Avslutar loopen
+                            Console.WriteLine("Loop ending!");
+                            play = false;
+                            break;
+                        default:
+                            Console.WriteLine("Please only use the numbers: 1-6");
+                            break;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Please dont enter a null value");
+                }
+                
             }
         }
 
