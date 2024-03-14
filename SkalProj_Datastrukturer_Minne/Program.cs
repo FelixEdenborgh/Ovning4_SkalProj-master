@@ -231,9 +231,10 @@ namespace SkalProj_Datastrukturer_Minne
                                 // Om man vill bara ta bort första eller sista så kan man köra "dequeue".
                                 // Denna tar bara bort dem i mitten och inte första eller sista.
                                 Queue<string> newQueList = new Queue<string>();
-                                bool found = false;
+                                bool found = false; // Flagan found är falsk
                                 foreach (string customersInQue in CustomerQue)
                                 {
+                                    // kollar om 2 strängar är lika och att flagan found inte är true.
                                     if (customersInQue.Equals(customerLeaveQue, StringComparison.OrdinalIgnoreCase) && !found)
                                     {
                                         found = true; // Förhindrar att fler kunder tas bort
@@ -242,13 +243,14 @@ namespace SkalProj_Datastrukturer_Minne
                                     // Lägger in alla andra kunder i den nya kön
                                     newQueList.Enqueue(customersInQue);
                                 }
-
+                                // Om flagan hittas
                                 if (found)
                                 {
                                     // Uppdaterar den ursprungliga kön endast om den specifika kunden hittades och togs bort
                                     CustomerQue = newQueList;
                                     Console.WriteLine($"{customerLeaveQue} has been removed from the que\n");
                                 }
+                                // Om inte så får man ett fel meddelande
                                 else
                                 {
                                     Console.WriteLine($"Person: {customerLeaveQue} was not found in the que\n");
@@ -261,16 +263,18 @@ namespace SkalProj_Datastrukturer_Minne
                             }
                             break;
                         case "4":
+                            // Tar bort första personen i kön
                             Console.WriteLine("Removing the first person in the que");
                             Console.WriteLine($"{CustomerQue.Peek()} has been removed from que\n");
                             CustomerQue.Dequeue();
                             break;
                         case "5":
-                            // Vissar nästa kund som är på tur utan att ta bort den från kön.
+                            // Kollar om listan är tom och skriver felmeddelande om den är det
                             if (CustomerQue.Count == 0)
                             {
                                 Console.WriteLine("The list is empty\n");
                             }
+                            // Vissar nästa kund som är på tur utan att ta bort den från kön.
                             else
                             {
                                 string nextCustomer = CustomerQue.Peek();
@@ -279,10 +283,10 @@ namespace SkalProj_Datastrukturer_Minne
                             break;
                         case "6":
                             // Avslutar loopen
-                            Console.WriteLine("Loop ending!");
+                            Console.WriteLine("Exiting: ExamineQueue()");
                             play = false;
                             break;
-                        default:
+                        default: // Fail safe där programmet varnar om man skriver något annat än det som den frågar om.
                             Console.WriteLine("Please only use the numbers: 1-6");
                             break;
                     }
@@ -305,6 +309,56 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
+
+            /*
+             1. Simulera ännu en gång ICA-kön på papper. Denna gång med en stack. Varför är det inte så smart att använda en stack i det här fallet?
+                Problemet är att om man kör som en ICA kö med stack så kommer det vara att den som kommer först till kön kommer längst bak och den som kommer sist
+                får hjälp först.
+                Och det kommer aldrig funka då man själv vill inte vänta längre varje gång det kommer en ny person som vill betala.
+                Utan man vill hälre vara att den som kommer först får hjälp först.
+            Kolla readme filen för mer info + bild.
+             */
+
+            // bool som säger att loopen ska bara spelar så länge boolen är true
+            bool play = true;
+            // spelar så länge boolen är true
+            while (play == true) 
+            {
+                Console.WriteLine("1. Revers string\n2. quit");
+                // tar hand här om varningen att det kan vara en null
+                string? input = Console.ReadLine();
+                if(input != null)
+                {
+                    switch(input)
+                    {
+                        case "1":
+                            Console.WriteLine("Enter the string you want to reverse: ");
+                            // tar hand här om varningen att det kan vara en null
+                            string? reversText = Console.ReadLine();
+                            if(reversText != null)
+                            {
+                                // Kontaktar en annan method som vänder på strängen.
+                                string reversedText = Reverse(reversText);
+                                // Skriver ut strängen
+                                Console.WriteLine($"You entered: {reversText}\nAnd your new string are: {reversedText}");
+                            }
+                            else { Console.WriteLine("Thats a null"); }
+                            break;
+                        case "2":
+                            // Lämnar methoden
+                            Console.WriteLine("Exiting: ExamineStack()");
+                            play = false;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong type of input!");
+                }
+                
+            }
         }
 
         static void CheckParanthesis()
@@ -315,6 +369,17 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+        }
+
+        // Använder denna metod för att vända ordet i en string input 
+        public static string Reverse(string input)
+        {
+            // lägger in stängen i en array
+            char[] charArray = input.ToCharArray();
+            // Vänder på orden i arrayn
+            Array.Reverse(charArray);
+            // Skickar tillbaka den nya strängen
+            return new string(charArray);
         }
 
     }
