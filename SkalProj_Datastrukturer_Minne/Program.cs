@@ -77,9 +77,9 @@ namespace SkalProj_Datastrukturer_Minne
             bool loopPlay = true;
             while (loopPlay)
             {
-                Console.WriteLine("Enter +: To add, or -: To remove or quit: To exit, S: To Show all data in list");
+                Console.WriteLine("Enter +: To add, or -: To remove, S: To Show all data in list, q: to quit");
                 Console.WriteLine("Like: +Adam to add Adam to list, or -Adam to remove Adam from list");
-                string input = Console.ReadLine();
+                string input = Console.ReadLine().ToLower();
                 char nav = input[0];// get the command for + and -
 
 
@@ -106,9 +106,12 @@ namespace SkalProj_Datastrukturer_Minne
                             Console.WriteLine(item);
                         }
                         break;
-                    default:
+                    case 'q':
                         Console.WriteLine("Exiting ExamineList() method!");
                         loopPlay = false;
+                        break;
+                    default:
+                        Console.WriteLine("Only use '+' or '-' or 's' to show list, or 'q' to exit");
                         break;
                 }
             }
