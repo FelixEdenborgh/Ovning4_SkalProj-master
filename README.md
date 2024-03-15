@@ -61,6 +61,7 @@ Frågor:
    1. Skapa med hjälp av er nya kunskap funktionalitet för att kontrollera en välformad sträng på papper. Du ska använda dig av någon eller några av de datastrukturer vi precis gått igenom. Vilken datastruktur       
    använder du?
    Använder mig at stack
+
 ![mspaint_QBNSbIX4De](https://github.com/FelixEdenborgh/Ovning4_SkalProj-master/assets/31070311/38b4294f-f4ce-46d4-b257-c4c3ad47074c)
 
    
