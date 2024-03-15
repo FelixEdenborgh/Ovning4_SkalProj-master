@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace SkalProj_Datastrukturer_Minne
@@ -368,6 +369,42 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+
+            Console.WriteLine("Enter a phrase to check if it's valid: ");
+            string? checkString = Console.ReadLine();
+            if (checkString != null)
+            {
+                Stack<char> left = new Stack<char>(); // Använd en generisk Stack<char>
+                bool isValid = true; // Antag först att strängen är giltig
+                foreach (char c in checkString)
+                {
+                    if (c == '(' || c == '{' || c == '[')
+                    {
+                        left.Push(c);
+                    }
+                    else if ((c == ')' && (left.Count == 0 || left.Pop() != '(')) ||
+                             (c == '}' && (left.Count == 0 || left.Pop() != '{')) ||
+                             (c == ']' && (left.Count == 0 || left.Pop() != '[')))
+                    {
+                        // Om vi hittar en omatchad stängande parentes, är strängen inte giltig
+                        isValid = false;
+                        break; // Avsluta loopen tidigt eftersom vi redan hittat ett fel
+                    }
+                }
+                if (isValid && left.Count == 0) // Kontrollera även att stacken är tom
+                {
+                    Console.WriteLine("That's a valid string.");
+                }
+                else
+                {
+                    Console.WriteLine("That's not a valid string.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("That's a nullable string.");
+            }
+
 
         }
 
